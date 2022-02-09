@@ -79,4 +79,54 @@ kubernetes.io/change-cause="Definindo a imagem com versão latest"
 # volta para a revisão 2
 kubectl rollout undo deployment nginx-deployment --to-revision=2
 ```
+
+Exemplo de ReplicaSet:
+```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: portal-noticias-replicaset
+spec:
+  template:
+    metadata:
+      name: porta-noticias
+      labels:
+        app: portal-noticias
+    spec:
+      containers:
+        - name: portal-noticias-container
+          image: aluracursos/portal-noticias:1
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: portal-configmap
+  replicas: 3
+  selector:
+    matchLabels:
+      app: portal-noticias
+```
+
+Exemplo de Deployment:
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: nginx-pod
+      labels:
+        app: nginx-pod
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1
+          ports:
+            - containerPort: 80
+  selector:
+    matchLabels:
+      app: nginx-pod
 ```
