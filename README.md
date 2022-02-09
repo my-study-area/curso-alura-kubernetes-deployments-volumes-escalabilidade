@@ -60,4 +60,23 @@ apt-get update && apt-get install -y iputils-ping
 # instala mysqlclient no container
 apt-get install -y default-mysql-client
 
+# lista os resulsets
+kubectl get rs
+
+# lista os deployments
+kubectl get deployments
+
+# lista as revisões
+kubectl rollout history deployment nginx-deployment
+
+# gera uma revisão
+kubectl -f deployments --record=true
+
+# adiciona uma descrição na evisão
+kubectl annotate deployment nginx-deployment \
+kubernetes.io/change-cause="Definindo a imagem com versão latest"
+
+# volta para a revisão 2
+kubectl rollout undo deployment nginx-deployment --to-revision=2
+```
 ```
