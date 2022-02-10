@@ -78,6 +78,9 @@ kubernetes.io/change-cause="Definindo a imagem com versão latest"
 
 # volta para a revisão 2
 kubectl rollout undo deployment nginx-deployment --to-revision=2
+
+# deleta um deployment
+kubectl delete deployment nginx-deployment
 ```
 
 Exemplo de ReplicaSet:
