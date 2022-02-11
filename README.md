@@ -81,6 +81,11 @@ kubectl rollout undo deployment nginx-deployment --to-revision=2
 
 # deleta um deployment
 kubectl delete deployment nginx-deployment
+
+# acessa o ssh do minikube (node)
+# obs: utilizado para criar diretório local
+# na criação de volumes
+minikube ssh
 ```
 
 Exemplo de ReplicaSet:
@@ -132,4 +137,29 @@ spec:
   selector:
     matchLabels:
       app: nginx-pod
+```
+
+Exemplo de volume:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest 
+      volumeMounts:
+        - mountPath: /teste-vol
+          name: vol-2
+    - name: jekins-container
+      image: jenkins/jenkins:alpine
+      volumeMounts:
+        - mountPath: /teste-vol2
+          name: vol-2
+  volumes:
+    - name: vol-2
+      hostPath:
+        path: /tmp/vol-2
+        type: DirectoryOrCreate
 ```
