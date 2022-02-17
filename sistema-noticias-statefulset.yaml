@@ -18,6 +18,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: sistema-configmap
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
           volumeMounts:
               - name: imagens
                 mountPath: /var/www/html/uploads
