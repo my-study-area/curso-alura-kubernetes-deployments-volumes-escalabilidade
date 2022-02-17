@@ -86,6 +86,9 @@ kubectl delete deployment nginx-deployment
 # obs: utilizado para criar diretório local
 # na criação de volumes
 minikube ssh
+
+# finaliza o serviço web para testar o liveness probe
+kubectl exec -it <POD_NAME> -- /etc/init.d/apache2 stop
 ```
 
 Exemplo de ReplicaSet:
