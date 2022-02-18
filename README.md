@@ -92,6 +92,18 @@ kubectl exec -it <POD_NAME> -- /etc/init.d/apache2 stop
 
 # lista os hpa
 kubectl get hpa
+
+# lista os addons
+minikube addons list
+
+# habilita o servidor de métricas para o hpa
+minikube addons enable metrics-server
+
+# caso o servidor de métricas não funcione execute os comandos abaixo
+# obs: esse erro ocorre na versão minikube v1.25.1 
+# fonte: https://github.com/kubernetes/minikube/issues/13620
+minikube stop
+minikube start --vm-driver=virtualbox --extra-config=kubelet.housekeeping-interval=10s
 ```
 
 Exemplo de ReplicaSet:
