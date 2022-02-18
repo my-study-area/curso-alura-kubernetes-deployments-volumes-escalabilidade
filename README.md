@@ -89,6 +89,9 @@ minikube ssh
 
 # finaliza o serviço web para testar o liveness probe
 kubectl exec -it <POD_NAME> -- /etc/init.d/apache2 stop
+
+# lista os hpa
+kubectl get hpa
 ```
 
 Exemplo de ReplicaSet:
