@@ -104,6 +104,18 @@ minikube addons enable metrics-server
 # fonte: https://github.com/kubernetes/minikube/issues/13620
 minikube stop
 minikube start --vm-driver=virtualbox --extra-config=kubelet.housekeeping-interval=10s
+
+# acessa o pod, instala o teste de stress no container 
+# e executa o teste de stress
+kubectl exec -it <POD-NAME> -- bash
+apt update; apt-get install -y stress
+stress -c 3
+
+# monitora a adição de réplicas no teste de stress
+ kubectl get hpa --watch
+
+# assiste as métricas dos pods
+watch "kubectl top pods"
 ```
 
 Exemplo de ReplicaSet:
