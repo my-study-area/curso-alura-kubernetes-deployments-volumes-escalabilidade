@@ -1,6 +1,45 @@
 # curso-alura-kubernetes-deployments-volumes-escalabilidade
 Curso de Kubernetes: Deployments, Volumes e Escalabilidade
 
+## Começando
+```bash
+# removes os pods, configmaps, svc, hpa, pvc, replicaset,
+# deployment e statefulsets
+kubectl delete pod --all
+kubectl delete configmap --all
+kubectl delete svc --all
+kubectl delete hpa --all
+kubectl delete pvc --all
+kubectl delete replicaset --all
+kubectl delete deployment --all
+kubectl delete statefulsets --all
+
+# inicia o node
+minikube start --vm-driver=virtualbox --extra-config=kubelet.housekeeping-interval=10s
+
+# inicia o configmap
+kubectl apply -f db-configmap.yaml
+kubectl apply -f portal-configmap.yaml
+kubectl apply -f sistema-configmap.yaml
+
+# inica os svc
+kubectl apply -f svc-db-noticias.yaml
+kubectl apply -f svc-portal-noticias.yaml
+kubectl apply -f svc-sistema-noticias.yaml
+
+# inicia o hpa
+kubectl apply -f portal-noticias-hpa.yaml
+
+# inicia o pvc
+kubectl apply -f sessao-pvc.yaml 
+kubectl apply -f imagens-pvc.yaml 
+
+# inicia os pod
+kubectl apply -f db-noticias-deployment.yaml 
+kubectl apply -f portal-noticia-deployment.yaml
+kubectl apply -f sistema-noticias-statefulset.yaml
+```
+
 ## Anotações
 ```bash
 # inicia um cluster kubernetes
@@ -116,6 +155,9 @@ stress -c 3
 
 # assiste as métricas dos pods
 watch "kubectl top pods"
+
+# lista tudo
+kubectl get all
 ```
 
 Exemplo de ReplicaSet:
